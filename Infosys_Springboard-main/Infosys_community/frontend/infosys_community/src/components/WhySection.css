@@ -1,0 +1,14 @@
+.why-section {
+  padding: 50px 20px;
+  background-color: #e3f2fd;
+  text-align: center;
+}
+
+.why-section h2 {
+  margin-bottom: 20px;
+}
+
+.why-section p {
+  max-width: 800px;
+  margin: 0 auto;
+}
