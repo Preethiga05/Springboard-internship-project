@@ -1,0 +1,1294 @@
+openapi: 3.0.1
+info:
+  title: API Documentation
+  description: This is the API documentation for the application.
+  version: '1.0'
+servers:
+  - url: http://localhost:8081
+    description: Generated server url
+  - url: http://localhost:8082
+    description: Generated server url
+  - url: http://localhost:8084
+    description: Generated server url
+  - url: http://localhost:8083
+    description: Generated server url
+  - url: http://localhost:8085
+    description: Generated server url
+paths:
+  /auth/signup:
+    post:
+      tags:
+        - user-controller
+      operationId: signUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /auth/login:
+    post:
+      tags:
+        - user-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /api/getUser:
+    get:
+      tags:
+        - user-controller
+      operationId: getUser
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/getEmail:
+    get:
+      tags:
+        - user-controller
+      operationId: getEmail
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/societyRegister:
+    post:
+      tags:
+        - society-controller
+      operationId: residentRegistration
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/residentRegister:
+    post:
+      tags:
+        - resident-controller
+      operationId: residentRegistration_1
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResidentInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/addFlatInfo:
+    post:
+      tags:
+        - flat-controller
+      operationId: addFlatInfo
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlatInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Flat'
+  /api/getSocietyList:
+    get:
+      tags:
+        - society-controller
+      operationId: getSocietyList
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Society'
+  /api/getResident:
+    get:
+      tags:
+        - resident-controller
+      operationId: getResident
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Resident'
+  /api/getResidentList:
+    get:
+      tags:
+        - resident-controller
+      operationId: getResidentList
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resident'
+  /api/getResidentDetails:
+    get:
+      tags:
+        - resident-controller
+      operationId: getResidentDetails
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResidentDetailsInfo'
+  /api/getFlat:
+    get:
+      tags:
+        - flat-controller
+      operationId: getFlat
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: flatNo
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Flat'
+  /api/getFlatList:
+    get:
+      tags:
+        - flat-controller
+      operationId: getFlatList
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flat'
+  /api/getAdminDetails:
+    get:
+      tags:
+        - society-controller
+      operationId: getAdminDetails
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Society'
+  /api/removeLike/{postId}:
+    put:
+      tags:
+        - post-controller
+      operationId: removeLike
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Post'
+  /api/likePost/{postId}:
+    put:
+      tags:
+        - post-controller
+      operationId: likePost
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Post'
+  /api/editPost/{postId}:
+    put:
+      tags:
+        - post-controller
+      operationId: editPost
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponse'
+  /api/editNotice/{noticeId}:
+    put:
+      tags:
+        - notice-controller
+      operationId: editNotice
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: noticeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoticeInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NoticeResponse'
+  /api/editEvent/{eventId}:
+    put:
+      tags:
+        - event-controller
+      operationId: editEvent
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+  /api/submitFeedback/{eventId}:
+    post:
+      tags:
+        - feedback-controller
+      operationId: submitFeedback
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
+  /api/addPostInfo:
+    post:
+      tags:
+        - post-controller
+      operationId: addPostInfo
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponse'
+  /api/addNoticeInfo:
+    post:
+      tags:
+        - notice-controller
+      operationId: addNoticeInfo
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoticeInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NoticeResponse'
+  /api/addEventInfo:
+    post:
+      tags:
+        - event-controller
+      operationId: addEventInfo
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventInfo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+  /api/getPostList:
+    get:
+      tags:
+        - post-controller
+      operationId: getPostList
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+  /api/getNoticeList:
+    get:
+      tags:
+        - notice-controller
+      operationId: getNoticeList
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notice'
+  /api/getNotice/{noticeId}:
+    get:
+      tags:
+        - notice-controller
+      operationId: getNotice
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: noticeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Notice'
+  /api/getFeedback/{eventId}:
+    get:
+      tags:
+        - feedback-controller
+      operationId: getFeedback
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Feedback'
+  /api/getEventList:
+    get:
+      tags:
+        - event-controller
+      operationId: getEventList
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+  /api/getEvent/{eventId}:
+    get:
+      tags:
+        - event-controller
+      operationId: getEvent
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Event'
+  /api/removePost/{postId}:
+    delete:
+      tags:
+        - post-controller
+      operationId: removePost
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostResponse'
+  /api/removeNotice/{noticeId}:
+    delete:
+      tags:
+        - notice-controller
+      operationId: removeNotice
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: noticeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NoticeResponse'
+  /api/removeEvent/{eventId}:
+    delete:
+      tags:
+        - event-controller
+      operationId: removeEvent
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+  /api/closeComplaint/{id}:
+    put:
+      tags:
+        - complaint-controller
+      operationId: closeComplaint
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Complaint'
+  /api/sendRequest:
+    post:
+      tags:
+        - request-controller
+      operationId: sendRequest
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/addVendor:
+    post:
+      tags:
+        - vendor-controller
+      operationId: addVendor
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Vendor'
+  /api/addComplaint:
+    post:
+      tags:
+        - complaint-controller
+      operationId: addComplaint
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComplaintDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Complaint'
+  /api/getAllVendors:
+    get:
+      tags:
+        - vendor-controller
+      operationId: getAllVendors
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vendor'
+  /api/getAllComplaints:
+    get:
+      tags:
+        - complaint-controller
+      operationId: getAllComplaints
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Complaint'
+  /api/paymentCallback:
+    post:
+      tags:
+        - payment-controller
+      operationId: paymentCallback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            /:
+              schema:
+                type: string
+  /api/createPayment:
+    post:
+      tags:
+        - payment-controller
+      operationId: createPayment
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            /:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /api/getAllPayments:
+    get:
+      tags:
+        - payment-controller
+      operationId: getAllPayments
+      responses:
+        '200':
+          description: OK
+          content:
+            /:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        message:
+          type: string
+    LoginInfo:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    AdminInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        phoneNo:
+          type: string
+        postal:
+          type: string
+        societyName:
+          type: string
+        societyAddress:
+          type: string
+        city:
+          type: string
+        district:
+          type: string
+    ResidentInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        phoneNo:
+          type: string
+        postal:
+          type: string
+        societyName:
+          type: string
+        flatNo:
+          type: string
+    FlatInfo:
+      type: object
+      properties:
+        flatNo:
+          type: string
+        societyId:
+          type: integer
+          format: int64
+        rent:
+          type: integer
+          format: int64
+    Flat:
+      type: object
+      properties:
+        flatId:
+          type: integer
+          format: int64
+        flatNo:
+          type: string
+        occupied:
+          type: boolean
+        rent:
+          type: integer
+          format: int64
+        societyId:
+          type: integer
+          format: int64
+    Society:
+      type: object
+      properties:
+        societyId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        phoneNo:
+          type: string
+        societyName:
+          type: string
+        societyAddress:
+          type: string
+        city:
+          type: string
+        district:
+          type: string
+        postal:
+          type: string
+        email:
+          type: string
+    Resident:
+      type: object
+      properties:
+        residentId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        phoneNo:
+          type: string
+        flatNo:
+          type: string
+        postal:
+          type: string
+        email:
+          type: string
+        flatId:
+          type: integer
+          format: int64
+        societyId:
+          type: integer
+          format: int64
+        role:
+          type: string
+    ResidentDetailsInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        phoneNo:
+          type: string
+        postal:
+          type: string
+        societyName:
+          type: string
+        flatNo:
+          type: string
+        email:
+          type: string
+    Post:
+      type: object
+      properties:
+        postId:
+          type: integer
+          format: int64
+        content:
+          type: string
+        title:
+          type: string
+        likeCount:
+          type: integer
+          format: int64
+        postImage:
+          type: string
+        societyId:
+          type: integer
+          format: int64
+    PostInfo:
+      type: object
+      properties:
+        content:
+          type: string
+        title:
+          type: string
+        postImage:
+          type: string
+    PostResponse:
+      type: object
+      properties:
+        post:
+          $ref: '#/components/schemas/Post'
+        message:
+          type: string
+    NoticeInfo:
+      type: object
+      properties:
+        heading:
+          type: string
+        content:
+          type: string
+        datePosted:
+          type: string
+          format: date-time
+        noticeImage:
+          type: string
+    Notice:
+      type: object
+      properties:
+        noticeId:
+          type: integer
+          format: int64
+        heading:
+          type: string
+        content:
+          type: string
+        datePosted:
+          type: string
+          format: date-time
+        noticeImage:
+          type: string
+        societyId:
+          type: integer
+          format: int64
+    NoticeResponse:
+      type: object
+      properties:
+        notice:
+          $ref: '#/components/schemas/Notice'
+        message:
+          type: string
+    EventInfo:
+      type: object
+      properties:
+        eventName:
+          type: string
+        eventDate:
+          type: string
+          format: date-time
+        eventDetails:
+          type: string
+        eventImage:
+          type: string
+    Event:
+      type: object
+      properties:
+        eventId:
+          type: integer
+          format: int64
+        eventName:
+          type: string
+        eventDate:
+          type: string
+          format: date-time
+        eventDetails:
+          type: string
+        eventImage:
+          type: string
+        societyId:
+          type: integer
+          format: int64
+    EventResponse:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/Event'
+        message:
+          type: string
+    FeedbackInfo:
+      type: object
+      properties:
+        content:
+          type: string
+    Feedback:
+      type: object
+      properties:
+        feedbackId:
+          type: integer
+          format: int64
+        content:
+          type: string
+        eventId:
+          type: integer
+          format: int64
+    FeedbackResponse:
+      type: object
+      properties:
+        feedback:
+          $ref: '#/components/schemas/Feedback'
+        message:
+          type: string
+    Complaint:
+      type: object
+      properties:
+        complaintId:
+          type: integer
+          format: int64
+        residentId:
+          type: integer
+          format: int64
+        flatNo:
+          type: string
+        personName:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        societyId:
+          type: integer
+          format: int64
+    RequestDto:
+      type: object
+      properties:
+        address:
+          type: string
+        description:
+          type: string
+        vendorId:
+          type: integer
+          format: int64
+        phoneNo:
+          type: string
+    VendorDto:
+      type: object
+      properties:
+        name:
+          type: string
+        service:
+          type: string
+        company:
+          type: string
+        phoneNo:
+          type: string
+        email:
+          type: string
+    Vendor:
+      type: object
+      properties:
+        vendorId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        company:
+          type: string
+        email:
+          type: string
+        service:
+          type: string
+        phoneNo:
+          type: string
+        societyId:
+          type: integer
+          format: int64
+    ComplaintDto:
+      type: object
+      properties:
+        personName:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+    Payment:
+      type: object
+      properties:
+        paymentId:
+          type: integer
+          format: int64
+        flatNo:
+          type: string
+        amount:
+          type: integer
+          format: int64
+        paymentDate:
+          type: string
+          format: date-time
+        status:
+          type: string
+        razorpayId:
+          type: string
+        societyId:
+          type: integer
+          format: int64
+
+
+
+
