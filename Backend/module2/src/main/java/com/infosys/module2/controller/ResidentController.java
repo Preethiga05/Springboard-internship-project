@@ -1,8 +1,7 @@
 package com.infosys.module2.controller;
 
-import com.infosys.module2.exception.Module2Exception;
-import com.infosys.module2.info.ResidentInfo;
-import com.infosys.module2.info.ResidentDetailsInfo;
+import com.infosys.module2.dto.ResidentDto;
+import com.infosys.module2.exception.RegistrationException;
 import com.infosys.module2.model.Resident;
 import com.infosys.module2.service.FlatService;
 import com.infosys.module2.service.ResidentService;
@@ -21,22 +20,24 @@ public class ResidentController {
     FlatService flatService;
     @Autowired
     SocietyService societyService;
-    @PostMapping("/residentRegister")
-    public String residentRegistration(@RequestHeader("Authorization") String jwt, @RequestBody ResidentInfo residentInfo) throws Module2Exception {
-        return residentService.residentRegistration(residentInfo,jwt);
+    @PostMapping("/resident-register")
+    public String residentRegistration(@RequestHeader("Authorization") String jwt, @RequestBody ResidentDto residentDto) throws RegistrationException {
+        System.out.println("Received JWT: " + jwt);
+        System.out.println("Resident Details DTO: " + residentDto);
+        return residentService.residentRegistration(residentDto,jwt);
     }
-    @GetMapping("/getResidentList")
-    public List<Resident> getResidentList(@RequestHeader("Authorization") String jwt){
-        return residentService.getResidentList();
-    }
-
-    @GetMapping("/getResidentDetails")
-    public ResidentDetailsInfo getResidentDetails(@RequestHeader("Authorization") String jwt){
-        return residentService.getResidentDetails(jwt);
+    @GetMapping("/residents")
+    public List<Resident> getResidents(@RequestHeader("Authorization") String jwt){
+        return residentService.getResidents();
     }
 
-    @GetMapping("/getResident")
-    public Resident getResident(@RequestHeader("Authorization") String jwt){
+    @GetMapping("/getResidentProfile")
+    public Resident getResidentProfile(@RequestHeader("Authorization") String jwt){
+        return residentService.getResidentProfile(jwt);
+    }
+
+    @GetMapping("/getResidentByJWT")
+    public Resident getResidentByJWT(@RequestHeader("Authorization") String jwt){
         return residentService.getResident(jwt);
     }
 }

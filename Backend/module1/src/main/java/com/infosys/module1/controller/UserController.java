@@ -1,8 +1,9 @@
 package com.infosys.module1.controller;
 
-import com.infosys.module1.exception.Module1Exception;
-import com.infosys.module1.security.JwtProvider;
-import com.infosys.module1.info.LoginInfo;
+import com.infosys.module1.config.JwtProvider;
+import com.infosys.module1.dto.LoginDto;
+import com.infosys.module1.exception.LoginException;
+import com.infosys.module1.exception.SignupException;
 import com.infosys.module1.model.User;
 import com.infosys.module1.response.AuthResponse;
 import com.infosys.module1.service.UserService;
@@ -15,19 +16,19 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/auth/signup")
-    public AuthResponse signUp(@RequestBody User user) throws Module1Exception {
+    public AuthResponse signUp(@RequestBody User user) throws SignupException {
         return userService.signUp(user);
     }
 
     @PostMapping("/auth/login")
-    public AuthResponse login(@RequestBody LoginInfo loginInfo) throws Module1Exception {
-        return userService.login(loginInfo);
+    public AuthResponse login(@RequestBody LoginDto loginDto) throws LoginException {
+        return userService.login(loginDto);
     }
-    @GetMapping("api/getEmail")
-    public String getEmail(@RequestHeader("Authorization") String jwt){
+    @GetMapping("api/get-email")
+    public String getEmailFromJWT(@RequestHeader("Authorization") String jwt){
         return JwtProvider.getEmailFromJwtToken(jwt);
     }
-    @GetMapping("api/getUser")
+    @GetMapping("api/get-user")
     public User getUser(@RequestHeader ("Authorization") String jwt){
         return userService.getUser(jwt);
     }

@@ -11,7 +11,8 @@
 	<groupId>com.infosys</groupId>
 	<artifactId>module1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>module1</name>
+	<name>authentication</name>
+	<description>Authentication for community management</description>
 	<url/>
 	<licenses>
 		<license/>

@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Module1Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Module1Application.class, args);
-		System.out.println("Module 1 started...");
+		System.out.println("application is running");
 	}
 }
